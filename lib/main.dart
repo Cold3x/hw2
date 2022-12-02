@@ -34,8 +34,8 @@ class RandomNumbers extends StatefulWidget {
 }
 
 class _RandomNumbersState extends State<RandomNumbers> {
-
-  final items = List<ListItem>.generate(100,(i) => HeadingItem(i+1)).shuffle();
+  final items =
+      List<ListItem>.generate(100, (i) => HeadingItem(i + 1)).shuffle();
   Iterable<ListItem> tmpItems = [];
 
   @override
@@ -57,6 +57,7 @@ class _RandomNumbersState extends State<RandomNumbers> {
    */
   void showEven() {
     setState(() {
+      print("Test");
       //TODO
     });
   }
@@ -78,7 +79,6 @@ abstract class ListItem {
 }
 
 class HeadingItem implements ListItem {
-
   HeadingItem(this.number);
 
   @override
@@ -92,4 +92,3 @@ class HeadingItem implements ListItem {
   @override
   int number;
 }
-
