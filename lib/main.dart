@@ -34,17 +34,34 @@ class RandomNumbers extends StatefulWidget {
 }
 
 class _RandomNumbersState extends State<RandomNumbers> {
-  final items =
-      List<ListItem>.generate(100, (i) => HeadingItem(i + 1)).shuffle();
+  final items = List<ListItem>.generate(100, (i) => HeadingItem(i + 1));
   Iterable<ListItem> tmpItems = [];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(8),
-      itemCount: tmpItems.length,
+      itemCount: tmpItems.length + 2,
       itemBuilder: (context, i) {
-        final item = tmpItems.elementAt(i);
+        if (i == 0) {
+          return FloatingActionButton(
+            onPressed: () {
+              showEven();
+            },
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.navigation),
+          );
+        }
+        if (i == 1) {
+          return FloatingActionButton(
+            onPressed: () {
+              showID();
+            },
+            backgroundColor: Colors.red,
+            child: const Icon(Icons.navigation),
+          );
+        }
+        final item = tmpItems.elementAt(i - 2);
         return ListTile(
           title: item.buildTitle(context),
         );
@@ -57,7 +74,7 @@ class _RandomNumbersState extends State<RandomNumbers> {
    */
   void showEven() {
     setState(() {
-      print("Test");
+      tmpItems = items.where((item) => item.number.isEven);
       //TODO
     });
   }
@@ -68,6 +85,9 @@ class _RandomNumbersState extends State<RandomNumbers> {
    */
   void showID() {
     setState(() {
+      String id = '620510601';
+      tmpItems =
+          items.where((element) => id.contains(element.number.toString()));
       //TODO
     });
   }
